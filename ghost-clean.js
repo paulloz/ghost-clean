@@ -46,10 +46,12 @@ const run = async function(args) {
                 if (args.verbose) {
                     console.log(`Removing: ${image.path}`);
                 }
+                if (!!!args.dry_run) {
                     if (image.delete()) {
                         ++removed;
                         sizeSaved += image.sizeMB;
                     }
+                }
             }
             console.log(`Done. ${removed > 0 ? removed : 'No'} file${removed > 1 ? 's' : ''} ` +
                         `(${sizeSaved.toFixed(2)}MB) ${removed === 1 ? 'was' : 'were'} removed. `)
