@@ -19,7 +19,7 @@ const confirm = async function(message) {
     });
 };
 
-const run = async function() {
+const run = async function(args) {
     const ghost = new Ghost();
 
     let unused = [];
@@ -40,6 +40,9 @@ const run = async function() {
         console.log(`${unused.length} file${unused.length > 1 ? 's' : ''} (${space}MB) can be safely removed. Please make a quick backup before proceeding.`);
         if (await confirm('Go ahead? [y/N] ')) {
             for (const image of unused) {
+                if (args.verbose) {
+                    console.log(`Removing: ${image.path}`);
+                }
                 image.delete();
             }
             console.log(`Done. ${unused.length} file${unused.length > 1 ? 's' : ''} (${space}MB) were removed. `)

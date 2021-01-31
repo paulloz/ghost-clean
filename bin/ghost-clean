@@ -6,9 +6,10 @@ const { ArgumentParser } = require('argparse');
 const parser = new ArgumentParser({ add_help: true });
 parser.add_argument('--content-key', { required: true });
 parser.add_argument('--admin-key', { required: true });
+parser.add_argument('-v', '--verbose', { action: 'store_true' });
 
 const args = parser.parse_args();
 process.env.GHOST_CONTENT_KEY = args.content_key
 process.env.GHOST_ADMIN_KEY = args.admin_key
 
-require('../ghost-clean').run();
+require('../ghost-clean').run(args);
