@@ -2,7 +2,7 @@
 
 const readline = require('readline');
 
-const Ghost = require('./src/ghost');
+const Ghost = require('./lib/ghost');
 
 const confirm = async function(message) {
     readline.emitKeypressEvents(process.stdin);
@@ -25,11 +25,12 @@ const run = async function() {
     let unused = [];
 
     for (const image of ghost.images) {
-        const isUsedInPost = await ghost.posts.uses(image);
         const isUsedInAuthors = await ghost.authors.uses(image);
+        const isUsedInPages = await ghost.pages.uses(image);
+        const isUsedInPosts = await ghost.posts.uses(image);
         const isUsedInSettings = await ghost.settings.uses(image);
-        // TODO: pages and tags
-        if (!isUsedInPost && !isUsedInAuthors && !isUsedInSettings) {
+        const isUsedInTags = await ghost.tags.uses(image);
+        if (!isUsedInAuthors && !isUsedInPages && !isUsedInPosts && !isUsedInSettings && !isUsedInTags) {
             unused.push(image);
         }
     }
