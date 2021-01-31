@@ -1,0 +1,20 @@
+{
+  "name": "ghost-clean",
+  "version": "0.0.1",
+  "description": "Clean your ghost server from unused images.",
+  "dependencies": {
+    "@tryghost/admin-api": "^1.3.7",
+    "@tryghost/content-api": "^1.4.13",
+    "argparse": "^2.0.1"
+  },
+  "devDependencies": {},
+  "bin": {
+    "ghost-clean": "./bin/ghost-clean"
+  },
+  "author": {
+    "name": "Paul Joannon",
+    "email": "hello@pauljoannon.com",
+    "url": "https://pauljoannon.com"
+  },
+  "license": "MIT"
+}
