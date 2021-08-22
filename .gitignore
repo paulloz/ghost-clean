@@ -2,3 +2,4 @@ node_modules/
 
 content/
 config.production.json
+.ghost-clean.config.json

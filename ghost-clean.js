@@ -54,7 +54,7 @@ const run = async function(args) {
                 }
             }
             console.log(`Done. ${removed > 0 ? removed : 'No'} file${removed > 1 ? 's' : ''} ` +
-                        `(${sizeSaved.toFixed(2)}MB) ${removed === 1 ? 'was' : 'were'} removed. `)
+                        `(${sizeSaved.toFixed(2)}MB) ${removed === 1 ? 'was' : 'were'} removed.`);
         } else {
             console.log('Abort.');
         }

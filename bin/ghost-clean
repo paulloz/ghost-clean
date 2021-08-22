@@ -1,16 +1,32 @@
 #!/usr/bin/env node
 'use strict';
 
+const CONFIG_FILE_NAME = '.ghost-clean.config.json';
+const CONFIG_CONTENT_KEY = 'content-key';
+const CONFIG_ADMIN_KEY = 'admin-key';
+
 const { ArgumentParser } = require('argparse');
+const Fs = require('fs');
+
+let [ content_key, admin_key ] = [null, null];
+if (Fs.existsSync(CONFIG_FILE_NAME)) {
+    const config = JSON.parse(Fs.readFileSync(CONFIG_FILE_NAME));
+    if (CONFIG_CONTENT_KEY in config) {
+        content_key = config[CONFIG_CONTENT_KEY];
+    }
+    if (CONFIG_ADMIN_KEY in config) {
+        admin_key = config[CONFIG_ADMIN_KEY];
+    }
+}
 
 const parser = new ArgumentParser({ add_help: true });
 parser.add_argument('-v', '--verbose', { action: 'store_true' });
 parser.add_argument('--dry-run', { action: 'store_true' });
-parser.add_argument('--content-key', { required: true });
-parser.add_argument('--admin-key', { required: true });
+parser.add_argument(`--${CONFIG_CONTENT_KEY}`, { required: content_key == null });
+parser.add_argument(`--${CONFIG_ADMIN_KEY}`, { required: admin_key == null });
 
 const args = parser.parse_args();
-process.env.GHOST_CONTENT_KEY = args.content_key
-process.env.GHOST_ADMIN_KEY = args.admin_key
+process.env.GHOST_CONTENT_KEY = args.content_key || content_key
+process.env.GHOST_ADMIN_KEY = args.admin_key || admin_key
 
 require('../ghost-clean').run(args);

@@ -18,7 +18,14 @@ From your Ghost installation folder (where your `config.production.json` file li
 ```
 $> ghost-clean --content-key CONTENT_API_KEY --admin-key ADMIN_API_KEY
 ```
-You'll be prompted for confirmation before files are actually removed.  
+If you prefer to store your configuration in a configuration file, put a file with the following structure in your Ghost installation folder and name it `.ghost-clean.config.json`.  
+```json
+{
+    "content-key": "CONTENT_API_KEY",
+    "admin-key": "ADMIN_API_KEY"
+}
+```
+Either way, you'll be prompted for confirmation before files are actually removed.  
 
 
 :warning: Always make backups before running cleanup scripts.  
